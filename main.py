@@ -58,7 +58,7 @@ def run_rc4(k, text):
 # Command line interface functionality follows.
 
 
-def loop_user_query(k):
+def process_entry(k):
     while True:
         text = input('Enter plain or cipher text(or 0 to quir): ')
         if text == '0':
@@ -76,7 +76,7 @@ def algorithm_rc4():
     key = [ord(char) for char in key]
     k = initialize(key)
     try:
-        loop_user_query(k)
+        process_entry(k)
     except EOFError:
         print('Bye! Have a good time')
 
