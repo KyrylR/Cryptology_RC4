@@ -1,11 +1,11 @@
 """
 ------------------------------------------------Theory------------------------------------------------------------------
-RC4 generates a pseudorandom stream of bits (a keystream). As with any stream cipher,
+RC4 generates a pseudorandom stream of bits (a key-stream). As with any stream cipher,
 these can be used for encryption by combining it with the plaintext using bit-wise exclusive-or;
 decryption is performed the same way (since exclusive-or with given data is an involution).
 This is similar to the one-time pad except that generated pseudorandom bits, rather than a prepared stream, are used.
 
-To generate the keystream, the cipher makes use of a secret internal state which consists of two parts:
+To generate the key-stream, the cipher makes use of a secret internal state which consists of two parts:
     A permutation of all 256 possible bytes (denoted "S" below).
     Two 8-bit index-pointers (denoted "i" and "j").
 
@@ -60,7 +60,7 @@ def run_rc4(k, text):
 
 def process_entry(k):
     while True:
-        text = input('Enter plain or cipher text(or 0 to quir): ')
+        text = input('Enter plain or cipher text(or 0 to quit): ')
         if text == '0':
             break
         # Pass a copy of k
