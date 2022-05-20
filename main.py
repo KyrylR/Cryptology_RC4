@@ -46,13 +46,15 @@ def random_bytes_generator(k):
 
 def run_rc4(k, text):
     cipher = []
+    key = []
     gen = random_bytes_generator(k)
     for char in text:
         byte = ord(char)
         next_gen = next(gen)
+        key.append(next_gen)
         cipher_byte = byte ^ next_gen
         cipher.append(chr(cipher_byte))
-    return ''.join(cipher)
+    return ''.join(cipher), key
 
 
 # Command line interface functionality follows.
@@ -64,7 +66,20 @@ def process_entry(k):
         if text == '0':
             break
         # Pass a copy of k
-        print('Your RC4 text is:', repr(run_rc4(list(k), text)) + '\n')
+        cipher_text, key = run_rc4(list(k), text)
+        print(f'Your RC4 text is: {repr(cipher_text)}\n')
+        decrypted_text = repr(decryption_rc4(cipher_text, key))
+        print(f'Decryption: {decrypted_text}\n')
+
+
+def decryption_rc4(text, key):
+    cipher = []
+    for itr, char in enumerate(text):
+        byte = ord(char)
+        next_key = key[itr]
+        cipher_byte = byte ^ next_key
+        cipher.append(chr(cipher_byte))
+    return ''.join(cipher)
 
 
 def algorithm_rc4():
